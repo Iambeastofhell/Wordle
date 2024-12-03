@@ -34,7 +34,7 @@ def updatelst(ele, words):
 
     if len(correctdic) == 5:  #exit if game won as correct dictionary will have length 5 now
         sleep(2)
-        print(correctdic)
+        print("".join([correctdic[0],correctdic[1],correctdic[2],correctdic[3],correctdic[4]]))
         driver.quit()
         exit(1)
 
@@ -61,10 +61,12 @@ service = Service(executable_path=driverpath)
 driver = webdriver.Chrome(service=service)
 driver.get("https://www.nytimes.com/games/wordle/index.html")
 sleep(2)
+buttons = driver.find_element(By.CLASS_NAME, "purr-blocker-card__button")
+buttons.click()
 
 buttons = driver.find_elements(By.CLASS_NAME, "Welcome-module_button__ZG0Zh")
 if len(buttons) >= 3:
-    buttons[2].click()
+    buttons[3].click()
     sleep(3)  
 
 #had to do this because the three bittons had the same class and if not used the subsribe button was being clicked, so i had to acces button[2]
@@ -77,7 +79,7 @@ sleep(2)
 
 body = driver.find_element(By.TAG_NAME, 'body')
 
-word = "ADIOS" #an initial word
+word = "ADIEU" #an initial word
 body.send_keys(word + Keys.RETURN)
 sleep(3)
 
